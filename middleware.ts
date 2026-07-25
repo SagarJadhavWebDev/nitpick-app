@@ -10,7 +10,16 @@ const isPublicRoute = createRouteMatcher([
   "/api/webhooks/clerk(.*)",
 ]);
 
+import { NextResponse } from "next/server";
+
 export default clerkMiddleware(async (auth, request) => {
+  const url = new URL(request.url);
+  
+  // Restrict sign-in and sign-up routes by redirecting to homepage
+  if (url.pathname.startsWith("/sign-in") || url.pathname.startsWith("/sign-up")) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   if (!isPublicRoute(request)) {
     await auth.protect();
   }
