@@ -74,3 +74,11 @@ model BugReport {
   status        String   @default("open") // open | resolved | ignored
   createdAt     DateTime @default(now())
 }
+
+model WaitlistSignup {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String?  // e.g. "landing_hero", "landing_final"
+  createdAt DateTime @default(now())
+}
+
