@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Team {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique          // used in extension config
+  apiKey      String   @unique          // extension auth token
+  createdAt   DateTime @default(now())
+
+  // Paddle (Merchant of Record) fields — replaces Stripe
+  paddleCustomerId       String?  @unique
+  paddleSubscriptionId   String?  // null for lifetime customers — they have no subscription
+  subscriptionStatus     String   @default("trialing") // trialing | active | past_due | canceled | lifetime
+  planTier               String   @default("starter")  // starter | pro | lifetime_tier1 | lifetime_tier2
+  trialEndsAt            DateTime?
+
+  // Lifetime deal (AppSumo) fields — kept fully separate from subscription lifecycle
+  isLifetime             Boolean  @default(false)
+  lifetimeCode           String?  @unique   // the redemption code claimed, for support lookups
+  lifetimePurchasedAt    DateTime?
+
+  members      Member[]
+  reports      BugReport[]
+  integrations Integration[]
+}
+
+// AppSumo/lifetime redemption codes — generated in a batch upfront, claimed later by a Team
+model RedemptionCode {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  batch     String   // e.g. "appsumo_launch_2026"
+  claimedBy String?  // Team.id once redeemed
+  claimedAt DateTime?
+  createdAt DateTime @default(now())
+}
+
+model Member {
+  id          String   @id @default(cuid())
+  teamId      String
+  team        Team     @relation(fields: [teamId], references: [id])
+  email       String
+  role        String   @default("member") // owner | member
+  clerkUserId String   @unique
+  createdAt   DateTime @default(now())
+}
+
+model Integration {
+  id        String   @id @default(cuid())
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id])
+  type      String   // "slack_webhook" (v1), "jira", "linear" (v2)
+  config    Json     // { webhookUrl: "..." }
+  createdAt DateTime @default(now())
+}
+
+model BugReport {
+  id            String   @id @default(cuid())
+  teamId        String
+  team          Team     @relation(fields: [teamId], references: [id])
+  screenshotUrl String
+  pageUrl       String
+  consoleLogs   Json?
+  browserInfo   Json?    // { os, browser, viewport }
+  note          String?
+  reporterEmail String?
+  status        String   @default("open") // open | resolved | ignored
+  createdAt     DateTime @default(now())
+}

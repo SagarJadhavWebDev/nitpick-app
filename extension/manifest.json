@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Nitpick",
+  "version": "0.1.0",
+  "description": "Capture a bug and send it straight to Slack.",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "128": "icons/icon128.png"
+  }
+}
