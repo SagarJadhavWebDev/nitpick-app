@@ -60,127 +60,25 @@ export async function POST(request: Request) {
     // Send confirmation email via Resend (fire and forget)
     if (resend) {
       resend.emails.send({
-        from: "Bugsnapr <mail@bugsnapr.com>",
+        from: "Sagar from Bugsnapr <mail@bugsnapr.com>",
         to: cleanEmail,
-        subject: "You're on the Bugsnapr waitlist! 🚀",
+        subject: "Joined the waitlist! (Quick hello from Bugsnapr founder) 🚀",
+        replyTo: "mail@bugsnapr.com",
         html: `
-          <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #EDEFF2; padding: 40px 20px; color: #14171F; margin: 0;">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 560px; margin: 0 auto;">
-              <!-- ── LOGO HEADER ── -->
-              <tr>
-                <td align="center" style="padding-bottom: 24px;">
-                  <table border="0" cellpadding="0" cellspacing="0" style="display: inline-block;">
-                    <tr>
-                      <!-- Logo Mark representation -->
-                      <td style="background-color: #14171F; border-radius: 8px; width: 32px; height: 32px; text-align: center; vertical-align: middle;">
-                        <span style="color: #FFC93C; font-weight: bold; font-size: 18px; font-family: monospace; line-height: 1;">⚡</span>
-                      </td>
-                      <!-- Wordmark -->
-                      <td style="padding-left: 12px; font-family: 'Courier New', Courier, monospace; font-weight: 900; font-size: 22px; color: #14171F; letter-spacing: -0.5px; vertical-align: middle;">
-                        Bugsnapr
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 15px; line-height: 1.6; color: #14171F; max-width: 580px; margin: 0 auto; padding: 20px 0;">
+            <p>Hey there,</p>
 
-              <!-- ── MAIN CARD CONTAINER ── -->
-              <tr>
-                <td style="background-color: #FFFFFF; border: 1px solid #D8DEE4; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); overflow: hidden;">
-                  <!-- Brand Stripe -->
-                  <div style="height: 5px; background: linear-gradient(to right, #FFC93C, #E8543E, #4A154B);"></div>
-                  
-                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding: 40px 32px;">
-                    <!-- Eyebrow Badge -->
-                    <tr>
-                      <td style="padding-bottom: 16px;">
-                        <span style="display: inline-block; background-color: #fbeee9; border: 1px solid #f8d0c2; color: #E8543E; font-size: 10px; font-weight: bold; padding: 4px 10px; rounded-border: 12px; border-radius: 20px; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Courier New', Courier, monospace;">
-                          Waitlist Confirmed
-                        </span>
-                      </td>
-                    </tr>
+            <p>Thanks for joining the Bugsnapr waitlist! I'm Sagar, the creator of Bugsnapr, and I wanted to personally confirm that your spot is secured.</p>
 
-                    <!-- Headline -->
-                    <tr>
-                      <td style="padding-bottom: 20px;">
-                        <h2 style="font-family: 'Courier New', Courier, monospace; font-size: 24px; font-weight: 800; color: #14171F; margin: 0; line-height: 1.2;">
-                          You&apos;re on the list!
-                        </h2>
-                      </td>
-                    </tr>
+            <p>I started building Bugsnapr because existing bug trackers are too bloated, too expensive ($39–$50/mo minimums), and force non-technical team members to create accounts just to report a simple broken button or crash. Bugsnapr connects directly to Slack via standard webhooks — no reporter logins required.</p>
 
-                    <!-- Body Intro -->
-                    <tr>
-                      <td style="padding-bottom: 24px; font-size: 15px; line-height: 1.6; color: #4B5160;">
-                        Hey there,<br /><br />
-                        Thanks for joining the Bugsnapr early access waitlist. We are building a lightweight tool for small teams that connects bug reports directly to Slack.
-                      </td>
-                    </tr>
+            <p><strong>Here is your early-bird perk:</strong> You will get a 14-day free trial on all plans when we open the doors.</p>
 
-                    <!-- Highlight Features -->
-                    <tr>
-                      <td style="padding-bottom: 28px;">
-                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px 20px;">
-                          <tr>
-                            <td style="padding-bottom: 12px; font-size: 14px; color: #14171F;">
-                              📸 <strong>Capture in 1-Click:</strong> Screenshots, console logs, and page context.
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="padding-bottom: 12px; font-size: 14px; color: #14171F;">
-                              💬 <strong>Straight to Slack:</strong> Instantly sent via standard webhooks.
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="font-size: 14px; color: #14171F;">
-                              ⚡ <strong>Zero Friction:</strong> No logins or accounts required for reporters.
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
+            <p>We'll notify you as soon as the early access keys are ready. In the meantime, if you have any questions, ideas, or custom features you want to see, just reply directly to this email. I read and respond to every message.</p>
 
-                    <!-- Early Bird Perk Highlight Box -->
-                    <tr>
-                      <td style="padding-bottom: 24px;">
-                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FFC93C; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #E2B22E;">
-                          <tr>
-                            <td style="font-size: 15px; font-weight: bold; color: #14171F;">
-                              🎁 Early Bird Perk: 14-day free trial on all plans when we launch.
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-
-                    <!-- Next steps -->
-                    <tr>
-                      <td style="padding-bottom: 32px; font-size: 15px; line-height: 1.6; color: #4B5160;">
-                        We will send you an invite code as soon as we open the doors for early users. If you have any ideas, suggestions, or features you want to see, reply directly to this email!
-                      </td>
-                    </tr>
-
-                    <!-- Sign off -->
-                    <tr>
-                      <td style="border-t: 1px solid #E2E8F0; border-top: 1px solid #E2E8F0; pt-24; padding-top: 24px; font-size: 14px; line-height: 1.5; color: #4B5160;">
-                        Best,<br />
-                        <strong>The Bugsnapr Team</strong><br />
-                        <a href="mailto:mail@bugsnapr.com" style="color: #4A154B; text-decoration: underline; font-weight: 550;">mail@bugsnapr.com</a>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-
-              <!-- ── FOOTER ── -->
-              <tr>
-                <td align="center" style="padding-top: 24px; font-size: 11px; color: #8F96A3; line-height: 1.4;">
-                  Bugsnapr — Simple bug reports straight to Slack.<br />
-                  You are receiving this because you signed up on our landing page.<br />
-                  <a href="https://bugsnapr.com" style="color: #4B5160; text-decoration: underline; font-weight: 500;">bugsnapr.com</a>
-                </td>
-              </tr>
-            </table>
+            <p>Best,<br />
+            <strong>Sagar</strong><br />
+            Founder, <a href="https://bugsnapr.com" style="color: #14171F; text-decoration: underline;">Bugsnapr</a></p>
           </div>
         `,
       }).catch((err) => console.error("Resend sending failed:", err));
